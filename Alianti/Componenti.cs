@@ -46,7 +46,7 @@ namespace Alianti
     {
         public Aliante()
         {
-            Aggiungi(new Ala());
+            Aggiungi(new Ala(l:20,a:15));
         } 
     }
     public class Ala:Componenti
@@ -61,6 +61,11 @@ namespace Alianti
         public override string des()
         {
             return $"Ala - Lunghezza: {l}, Apertura: {a}";
+        }
+        public override double cos()
+        {
+            //costo arbitrario basato sull'apertura (numero casuale)
+            return (a+l) * 2.5;
         }
     }
     
