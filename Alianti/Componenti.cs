@@ -68,6 +68,30 @@ namespace Alianti
             return (a+l) * 2.5;
         }
     }
+    public class Fusoliera:Componenti
+    {
+        private string made;
+        private double l;
+        public Fusoliera(string made, double l, double costom)
+        {
+            this.made = made;
+            this.l = l;
+            if (made != "Alluminio" && made != "Carbonio") throw new ArgumentException("Materiale non supportato (disponibilità Carbonio o alluminio).");
+        }
+        public override string des()
+        {
+            return $"Fusoliera - Lunghezza: {l}, Materiale: {made}";
+        }
+        public override double cos()
+        {
+            double costom=0.0;
+            if (made == "Alluminio") costom = 1.5;
+            else if (made == "Carbonio") costom = 2.0;
+
+            //costo arbitrario basato sull'apertura (numero casuale)
+            return l*costom;
+        }
+    }
     
     
     
