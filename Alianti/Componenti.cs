@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Alianti
 {
-    public abstract class Componenti<T> where T : Componenti<T>
+    public abstract class Componenti
     {
-        private List<T> componenti = new List<T>();
+        protected List<Componenti> componenti = new List<Componenti>();
         public virtual string des()
         {
-            var result = $"{typeof(T).Name}:\n";
+            var result = $"{GetType().Name}:\n";
             foreach (var componente in componenti)
             {
                 result += componente.des() + "\n";
@@ -27,11 +27,11 @@ namespace Alianti
             }
             return tot;
         }
-        public virtual void Aggiungi(T componente)
+        public virtual void Aggiungi(Componenti componente)
         {
             componenti.Add(componente);
         }
-        public virtual void Rimuovi(T componente)
+        public virtual void Rimuovi(Componenti componente)
         {
             componenti.Remove(componente);
         }
@@ -39,6 +39,28 @@ namespace Alianti
         {
             if (i >= 0 && i < componenti.Count) return componenti[i];
             return null;
+        }
+    }
+    //classe aliante composta dalle altre
+    public class Aliante:Componenti
+    {
+        public Aliante()
+        {
+            Aggiungi(new Ala());
+        } 
+    }
+    public class Ala:Componenti
+    {
+        private double l;
+        private double a;
+        public Ala(double l, double a)
+        {
+            this.l = l;
+            this.a = a;
+        }
+        public override string des()
+        {
+            return $"Ala - Lunghezza: {l}, Apertura: {a}";
         }
     }
     
